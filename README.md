@@ -76,6 +76,7 @@ Internally, this repository is validated with the `nvim-lts` binary. The example
 - `blink.cmp`: completion engine.
 - `friendly-snippets`: snippet collection for completion.
 - `conform.nvim`: formatter orchestration and format-on-save.
+- `gitsigns.nvim`: Git signs and hunk actions.
 - `nvim-treesitter`: Treesitter parser and highlighting support.
 - `telescope.nvim`: file finding and search UI.
 - `telescope-fzf-native.nvim`: native FZF sorter for Telescope.
@@ -106,6 +107,20 @@ File finding and search:
 - `<leader>fh`: help tags.
 - `<leader>fr`: recent files.
 - `<leader>fc`: commands.
+
+Git:
+
+- `[c`: previous Git hunk.
+- `]c`: next Git hunk.
+- `<leader>gs`: stage hunk.
+- `<leader>gr`: reset hunk.
+- `<leader>gS`: stage buffer.
+- `<leader>gR`: reset buffer.
+- `<leader>gp`: preview hunk.
+- `<leader>gb`: blame line.
+- `<leader>gd`: diff file.
+- `<leader>gq`: send hunks to quickfix.
+- `ih`: select hunk text object.
 
 Buffers:
 
