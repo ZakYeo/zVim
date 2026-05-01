@@ -1,6 +1,6 @@
-# zVim, a custom IDE layer for NeoVim
+# zVim, a custom IDE layer for Neovim
 
-Personal Neovim configuration built around `lazy.nvim`. The entrypoint is intentionally small: `init.lua` sets leaders, loads shared config from `lua/config/`, and imports plugin specs from `lua/plugins/`.
+zVim, short for Zak's Vim, is a Neovim IDE layer built around `lazy.nvim`. The entrypoint is intentionally small: `init.lua` sets leaders, loads shared config from `lua/config/`, and imports plugin specs from `lua/plugins/`.
 
 ## Structure
 
@@ -30,41 +30,40 @@ Personal Neovim configuration built around `lazy.nvim`. The entrypoint is intent
 
 ## Installation
 
-For a regular Neovim setup:
+Install zVim from GitHub:
 
 ```sh
-git clone <repo-url> ~/.config/nvim
-nvim
+curl -fsSL https://raw.githubusercontent.com/ZakYeo/zVim/main/install.sh | sh
 ```
 
-For a parallel setup next to an existing Neovim config, use `NVIM_APPNAME`. This example calls the setup `nvim-z` and installs it into `~/.config/nvim-z`:
+The installer clones zVim into `~/.config/zvim` and creates a `zVim` launcher in `~/.local/bin`. The launcher runs Neovim with `NVIM_APPNAME=zvim`, so zVim can live next to an existing Neovim setup.
+
+Run zVim with:
 
 ```sh
-git clone <repo-url> ~/.config/nvim-z
-NVIM_APPNAME=nvim-z nvim
+zVim
 ```
 
-`nvim-z` is only an example name. You can choose any app name, as long as it matches the directory under `~/.config/`.
+If `zVim` is not found after installation, add `~/.local/bin` to your `PATH`.
+
+The installer stops if `~/.config/zvim` or `~/.local/bin/zVim` already exists. Move or remove the existing path before reinstalling.
 
 ## Setup And Validation
 
-Regular setup:
+After installation:
 
 ```sh
-nvim --headless -i NONE '+Lazy! sync' +qa
-nvim --headless -i NONE '+lua require("neo-tree")' +qa
-nvim
+zVim --headless -i NONE '+Lazy! sync' +qa
+zVim --headless -i NONE '+lua require("neo-tree")' +qa
+zVim
 ```
 
-Parallel `nvim-z` setup:
+Internally, this repository is validated with the `nvim-lts` binary:
 
 ```sh
-NVIM_APPNAME=nvim-z nvim --headless -i NONE '+Lazy! sync' +qa
-NVIM_APPNAME=nvim-z nvim --headless -i NONE '+lua require("neo-tree")' +qa
-NVIM_APPNAME=nvim-z nvim
+nvim-lts --headless -i NONE '+Lazy! sync' +qa
+nvim-lts --headless -i NONE '+lua require("neo-tree")' +qa
 ```
-
-Internally, this repository is validated with the `nvim-lts` binary. The examples above use `nvim` because they are the normal user-facing commands.
 
 ## Plugins
 
