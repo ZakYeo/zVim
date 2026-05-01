@@ -342,6 +342,53 @@ require("lazy").setup({
     end,
   },
   {
+    "nvim-telescope/telescope.nvim",
+    version = "*",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      {
+        "nvim-telescope/telescope-fzf-native.nvim",
+        build = "make",
+      },
+    },
+    lazy = false,
+    config = function()
+      local telescope = require("telescope")
+      local builtin = require("telescope.builtin")
+
+      telescope.setup({
+        defaults = {
+          layout_strategy = "horizontal",
+          layout_config = {
+            horizontal = {
+              preview_width = 0.55,
+              preview_cutoff = 80,
+              prompt_position = "top",
+            },
+          },
+          sorting_strategy = "ascending",
+        },
+        extensions = {
+          fzf = {
+            fuzzy = true,
+            override_generic_sorter = true,
+            override_file_sorter = true,
+            case_mode = "smart_case",
+          },
+        },
+      })
+
+      telescope.load_extension("fzf")
+
+      vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Find: files" })
+      vim.keymap.set("n", "<leader>fw", builtin.live_grep, { desc = "Find: word search" })
+      vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Find: buffers" })
+      vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Find: help" })
+      vim.keymap.set("n", "<leader>fr", builtin.oldfiles, { desc = "Find: recent files" })
+      vim.keymap.set("n", "<leader>fc", builtin.commands, { desc = "Find: commands" })
+    end,
+  },
+  {
     "folke/which-key.nvim",
     event = "VeryLazy",
     opts = {
@@ -361,6 +408,13 @@ require("lazy").setup({
         { "<leader>9", desc = "Buffer: tab 9" },
         { "<leader>b", group = "buffer" },
         { "<leader>bd", desc = "Buffer: close" },
+        { "<leader>f", group = "find" },
+        { "<leader>fb", desc = "Find: buffers" },
+        { "<leader>fc", desc = "Find: commands" },
+        { "<leader>ff", desc = "Find: files" },
+        { "<leader>fh", desc = "Find: help" },
+        { "<leader>fr", desc = "Find: recent files" },
+        { "<leader>fw", desc = "Find: word search" },
         { "<leader>l", group = "language" },
         { "<leader>lc", desc = "Config: open init.lua" },
         { "<leader>ld", desc = "LSP: line diagnostic" },
