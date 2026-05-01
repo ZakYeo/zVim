@@ -1,0 +1,10 @@
+repos:
+  - repo: local
+    hooks:
+      - id: lua-language-server-check
+        name: Lua language server check
+        entry: ./scripts/lint-lua.sh
+        language: system
+        types: [lua]
+        pass_filenames: false
+        always_run: true
