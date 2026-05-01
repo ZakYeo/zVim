@@ -23,6 +23,7 @@ Personal Neovim configuration built around `lazy.nvim`. The entrypoint is intent
 - `make`
 - `tree-sitter` CLI
 - `ripgrep`
+- Formatter tools managed by Mason: `stylua`, `prettier`, `shfmt`, and `markdownlint-cli2`
 - A system clipboard provider for `unnamedplus`
 - Optional Nerd Font for plugin icons
 
@@ -70,9 +71,11 @@ Internally, this repository is validated with the `nvim-lts` binary. The example
 - `catppuccin/nvim`: colorscheme.
 - `mason.nvim`: language server installer.
 - `mason-lspconfig.nvim`: Mason integration for `nvim-lspconfig`.
+- `mason-tool-installer.nvim`: Mason integration for formatter tools.
 - `nvim-lspconfig`: LSP configurations.
 - `blink.cmp`: completion engine.
 - `friendly-snippets`: snippet collection for completion.
+- `conform.nvim`: formatter orchestration and format-on-save.
 - `nvim-treesitter`: Treesitter parser and highlighting support.
 - `telescope.nvim`: file finding and search UI.
 - `telescope-fzf-native.nvim`: native FZF sorter for Telescope.

@@ -78,7 +78,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
     map("n", "<leader>rn", vim.lsp.buf.rename, "LSP: rename")
     map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, "LSP: code action")
     map("n", "<leader>lf", function()
-      vim.lsp.buf.format({ bufnr = bufnr, timeout_ms = 3000 })
+      require("conform").format({
+        async = true,
+        bufnr = bufnr,
+        lsp_format = "fallback",
+      })
     end, "LSP: format")
     map("n", "<leader>ld", function()
       vim.diagnostic.open_float({ scope = "line" })
