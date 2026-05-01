@@ -2,6 +2,9 @@ return {
   {
     "mason-org/mason.nvim",
     lazy = false,
+    init = function()
+      require("config.lsp")
+    end,
     config = function()
       require("mason").setup()
     end,

@@ -22,13 +22,17 @@ vim.diagnostic.config({
 })
 
 vim.lsp.config("*", {
-  capabilities = {
-    textDocument = {
-      semanticTokens = {
-        multilineTokenSupport = true,
+  capabilities = vim.tbl_deep_extend(
+    "force",
+    {
+      textDocument = {
+        semanticTokens = {
+          multilineTokenSupport = true,
+        },
       },
     },
-  },
+    require("blink.cmp").get_lsp_capabilities(nil, true)
+  ),
   root_markers = { ".git" },
 })
 
@@ -57,10 +61,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(event)
     local client = vim.lsp.get_client_by_id(event.data.client_id)
     local bufnr = event.buf
-
-    if client and client:supports_method("textDocument/completion") then
-      vim.lsp.completion.enable(true, client.id, bufnr, { autotrigger = true })
-    end
 
     local function map(mode, lhs, rhs, desc)
       vim.keymap.set(mode, lhs, rhs, {

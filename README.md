@@ -71,6 +71,8 @@ Internally, this repository is validated with the `nvim-lts` binary. The example
 - `mason.nvim`: language server installer.
 - `mason-lspconfig.nvim`: Mason integration for `nvim-lspconfig`.
 - `nvim-lspconfig`: LSP configurations.
+- `blink.cmp`: completion engine.
+- `friendly-snippets`: snippet collection for completion.
 - `nvim-treesitter`: Treesitter parser and highlighting support.
 - `telescope.nvim`: file finding and search UI.
 - `telescope-fzf-native.nvim`: native FZF sorter for Telescope.
@@ -120,6 +122,11 @@ Terminal:
 
 LSP and diagnostics:
 
+- `<C-y>`: accept completion.
+- `<C-n>`: select next completion item.
+- `<C-p>`: select previous completion item.
+- `<C-Space>`: open completion or documentation.
+- `<C-e>`: close completion menu.
 - `gd`: go to definition.
 - `gD`: go to declaration.
 - `gi`: go to implementation.
