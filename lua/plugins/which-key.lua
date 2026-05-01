@@ -37,6 +37,7 @@ return {
       { "<leader>gR", desc = "Git: reset buffer" },
       { "<leader>gs", desc = "Git: stage hunk" },
       { "<leader>gS", desc = "Git: stage buffer" },
+      { "<leader>h", desc = "Dashboard: open" },
       { "<leader>l", group = "language" },
       { "<leader>lc", desc = "Config: open init.lua" },
       { "<leader>ld", desc = "LSP: line diagnostic" },

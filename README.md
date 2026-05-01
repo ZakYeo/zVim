@@ -1,4 +1,4 @@
-# Neovim LTS Config
+# zVim, a custom IDE layer for NeoVim
 
 Personal Neovim configuration built around `lazy.nvim`. The entrypoint is intentionally small: `init.lua` sets leaders, loads shared config from `lua/config/`, and imports plugin specs from `lua/plugins/`.
 
