@@ -80,7 +80,7 @@ fi
 LEGACY_LAUNCHER="$BIN_DIR/zVim"
 
 if [ "$COMMAND_NAME" != "zVim" ] && [ -e "$LEGACY_LAUNCHER" ]; then
-  info "Found legacy launcher at $LEGACY_LAUNCHER. Remove it if you no longer need the old zVim command."
+  info "Found legacy uppercase launcher at $LEGACY_LAUNCHER. Remove it if you no longer need it."
 fi
 
 if [ -e "$TMP_DIR" ]; then
@@ -111,4 +111,4 @@ case ":$PATH:" in
     ;;
 esac
 
-info "Run zVim with: $COMMAND_NAME"
+info "Run the zVim CLI with: $COMMAND_NAME"

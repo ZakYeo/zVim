@@ -44,7 +44,7 @@ By default, the installer uses the `nvim` command from your `PATH`. If your defa
 curl -fsSL https://raw.githubusercontent.com/ZakYeo/zVim/main/install.sh | ZVIM_NVIM_BIN=nvim-lts sh
 ```
 
-Run zVim with:
+Run the zVim CLI with:
 
 ```sh
 zvim
