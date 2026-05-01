@@ -2,6 +2,23 @@
 
 zVim, short for Zak's Vim, is a Neovim IDE layer built around `lazy.nvim`. The entrypoint is intentionally small: `init.lua` sets leaders, loads shared config from `lua/config/`, and imports plugin specs from `lua/plugins/`.
 
+
+<img width="1918" height="1138" alt="image" src="https://github.com/user-attachments/assets/cd43678f-7741-48ad-ab25-73fa74985105" />
+<img width="1918" height="1132" alt="image" src="https://github.com/user-attachments/assets/49aa0449-20d6-4863-9d0d-6a72964c61b6" />
+
+
+## Requirements
+
+- Neovim 0.11 or newer
+- Git
+- `make`
+- `tree-sitter` CLI
+- `ripgrep`
+- `lazygit` for the `<leader>gg` Git UI command
+- Formatter tools managed by Mason: `stylua`, `prettier`, `shfmt`, and `markdownlint-cli2`
+- A system clipboard provider for `unnamedplus`
+- Optional Nerd Font for plugin icons
+
 ## Structure
 
 - `init.lua`: startup entrypoint.
@@ -15,18 +32,6 @@ zVim, short for Zak's Vim, is a Neovim IDE layer built around `lazy.nvim`. The e
 - `lua/config/terminal.lua`: terminal helper behavior and terminal-mode navigation.
 - `lua/config/lazy.lua`: `lazy.nvim` bootstrap and plugin import.
 - `lua/plugins/`: plugin specs.
-
-## Requirements
-
-- Neovim 0.11 or newer
-- Git
-- `make`
-- `tree-sitter` CLI
-- `ripgrep`
-- `lazygit` for the `<leader>gg` Git UI command
-- Formatter tools managed by Mason: `stylua`, `prettier`, `shfmt`, and `markdownlint-cli2`
-- A system clipboard provider for `unnamedplus`
-- Optional Nerd Font for plugin icons
 
 ## Installation
 
