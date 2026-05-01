@@ -28,7 +28,36 @@ end, { desc = "Config: open init.lua" })
 
 vim.o.timeout = true
 vim.o.timeoutlen = 300
+vim.o.showtabline = 2
+vim.opt.termguicolors = true
 vim.opt.rtp:prepend(lazypath)
+
+local function use_terminal_background()
+  local transparent_groups = {
+    "Normal",
+    "NormalNC",
+    "NormalFloat",
+    "FloatBorder",
+    "SignColumn",
+    "EndOfBuffer",
+    "TabLineFill",
+    "BufferLineFill",
+    "NeoTreeNormal",
+    "NeoTreeNormalNC",
+    "WhichKeyFloat",
+    "Pmenu",
+  }
+
+  for _, group in ipairs(transparent_groups) do
+    vim.cmd.highlight(group .. " guibg=NONE ctermbg=NONE")
+  end
+end
+
+use_terminal_background()
+
+vim.api.nvim_create_autocmd("ColorScheme", {
+  callback = use_terminal_background,
+})
 
 local function neo_tree_width()
   return math.max(math.floor(vim.o.columns * 0.25), 30)
@@ -72,10 +101,71 @@ require("lazy").setup({
       spec = {
         { "<leader>e", desc = "Explorer: toggle" },
         { "<leader>E", desc = "Explorer: cwd" },
+        { "<leader>0", desc = "Buffer: last tab" },
+        { "<leader>1", desc = "Buffer: tab 1" },
+        { "<leader>2", desc = "Buffer: tab 2" },
+        { "<leader>3", desc = "Buffer: tab 3" },
+        { "<leader>4", desc = "Buffer: tab 4" },
+        { "<leader>5", desc = "Buffer: tab 5" },
+        { "<leader>6", desc = "Buffer: tab 6" },
+        { "<leader>7", desc = "Buffer: tab 7" },
+        { "<leader>8", desc = "Buffer: tab 8" },
+        { "<leader>9", desc = "Buffer: tab 9" },
+        { "<leader>b", group = "buffer" },
+        { "<leader>bd", desc = "Buffer: close" },
         { "<leader>l", group = "lua/config" },
         { "<leader>lc", desc = "Config: open init.lua" },
+        { "<S-h>", desc = "Buffer: previous tab" },
+        { "<S-l>", desc = "Buffer: next tab" },
       },
     },
+  },
+  {
+    "akinsho/bufferline.nvim",
+    version = "*",
+    dependencies = {
+      "nvim-tree/nvim-web-devicons",
+    },
+    lazy = false,
+    config = function()
+      local bufferline = require("bufferline")
+
+      bufferline.setup({
+        options = {
+          mode = "buffers",
+          diagnostics = "nvim_lsp",
+          indicator = {
+            style = "underline",
+          },
+          modified_icon = "●",
+          show_buffer_close_icons = false,
+          show_close_icon = false,
+          show_tab_indicators = true,
+          separator_style = "thin",
+          always_show_bufferline = true,
+          offsets = {
+            {
+              filetype = "neo-tree",
+              text = "Explorer",
+              text_align = "center",
+              separator = true,
+            },
+          },
+        },
+      })
+      use_terminal_background()
+
+      vim.keymap.set("n", "<S-l>", "<Cmd>BufferLineCycleNext<CR>", { desc = "Buffer: next tab" })
+      vim.keymap.set("n", "<S-h>", "<Cmd>BufferLineCyclePrev<CR>", { desc = "Buffer: previous tab" })
+      vim.keymap.set("n", "<leader>0", "<Cmd>BufferLineGoToBuffer -1<CR>", { desc = "Buffer: last tab" })
+      vim.keymap.set("n", "<leader>bd", "<Cmd>bdelete<CR>", { desc = "Buffer: close" })
+
+      for i = 1, 9 do
+        vim.keymap.set("n", "<leader>" .. i, "<Cmd>BufferLineGoToBuffer " .. i .. "<CR>", {
+          desc = "Buffer: tab " .. i,
+        })
+      end
+    end,
   },
   {
     "nvim-neo-tree/neo-tree.nvim",
