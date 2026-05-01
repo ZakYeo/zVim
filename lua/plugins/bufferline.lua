@@ -37,11 +37,11 @@ return {
 
     vim.keymap.set("n", "<S-l>", "<Cmd>BufferLineCycleNext<CR>", { desc = "Buffer: next tab" })
     vim.keymap.set("n", "<S-h>", "<Cmd>BufferLineCyclePrev<CR>", { desc = "Buffer: previous tab" })
-    vim.keymap.set("n", "<leader>0", "<Cmd>BufferLineGoToBuffer -1<CR>", { desc = "Buffer: last tab" })
+    vim.keymap.set("n", "<leader>b0", "<Cmd>BufferLineGoToBuffer -1<CR>", { desc = "Buffer: last tab" })
     vim.keymap.set("n", "<leader>bd", terminal.close_current_buffer, { desc = "Buffer: close" })
 
     for i = 1, 9 do
-      vim.keymap.set("n", "<leader>" .. i, "<Cmd>BufferLineGoToBuffer " .. i .. "<CR>", {
+      vim.keymap.set("n", "<leader>b" .. i, "<Cmd>BufferLineGoToBuffer " .. i .. "<CR>", {
         desc = "Buffer: tab " .. i,
       })
     end
