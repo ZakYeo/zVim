@@ -23,6 +23,7 @@ Personal Neovim configuration built around `lazy.nvim`. The entrypoint is intent
 - `make`
 - `tree-sitter` CLI
 - `ripgrep`
+- `lazygit` for the `<leader>gg` Git UI command
 - Formatter tools managed by Mason: `stylua`, `prettier`, `shfmt`, and `markdownlint-cli2`
 - A system clipboard provider for `unnamedplus`
 - Optional Nerd Font for plugin icons
@@ -127,6 +128,7 @@ Git:
 - `<leader>gp`: preview hunk.
 - `<leader>gb`: blame line.
 - `<leader>gd`: diff file.
+- `<leader>gg`: open LazyGit fullscreen. Requires the `lazygit` executable.
 - `<leader>gq`: send hunks to quickfix.
 - `ih`: select hunk text object.
 

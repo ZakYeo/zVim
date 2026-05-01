@@ -30,6 +30,7 @@ return {
       { "<leader>g", group = "git" },
       { "<leader>gb", desc = "Git: blame line" },
       { "<leader>gd", desc = "Git: diff file" },
+      { "<leader>gg", desc = "Git: lazygit" },
       { "<leader>gp", desc = "Git: preview hunk" },
       { "<leader>gq", desc = "Git: hunks to quickfix" },
       { "<leader>gr", desc = "Git: reset hunk" },

@@ -1,5 +1,32 @@
 local M = {}
 
+local lazygit
+
+local function fullscreen_float_opts()
+  return {
+    border = "none",
+    width = vim.o.columns,
+    height = vim.o.lines - vim.o.cmdheight,
+    row = 0,
+    col = 0,
+  }
+end
+
+local function lazygit_terminal()
+  if not lazygit then
+    local Terminal = require("toggleterm.terminal").Terminal
+
+    lazygit = Terminal:new({
+      cmd = "lazygit",
+      direction = "float",
+      hidden = true,
+      float_opts = fullscreen_float_opts,
+    })
+  end
+
+  return lazygit
+end
+
 function M.open_terminal_buffer()
   local current_win = vim.api.nvim_get_current_win()
   local target_win
@@ -52,6 +79,10 @@ function M.open_terminal_buffer()
   vim.bo.buflisted = true
   vim.cmd.terminal()
   vim.cmd.startinsert()
+end
+
+function M.toggle_lazygit()
+  lazygit_terminal():toggle()
 end
 
 function M.toggle_bottom_terminal()

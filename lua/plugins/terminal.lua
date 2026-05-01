@@ -49,5 +49,8 @@ return {
     vim.keymap.set("n", "<leader>ts", "<Cmd>TermSelect<CR>", {
       desc = "Terminal: select",
     })
+    vim.keymap.set("n", "<leader>gg", terminal.toggle_lazygit, {
+      desc = "Git: lazygit",
+    })
   end,
 }
