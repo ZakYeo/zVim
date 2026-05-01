@@ -540,6 +540,12 @@ require("lazy").setup({
         persist_mode = true,
         close_on_exit = true,
         auto_scroll = true,
+        winbar = {
+          enabled = true,
+          name_formatter = function(term)
+            return "terminal " .. term.id
+          end,
+        },
       })
 
       vim.keymap.set("n", "<leader>tt", "<Cmd>ToggleTerm direction=horizontal<CR>", {
