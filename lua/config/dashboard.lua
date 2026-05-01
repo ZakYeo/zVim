@@ -77,6 +77,7 @@ function M.setup()
         },
       },
       footer = {},
+      vertical_center = true,
     },
   })
 
