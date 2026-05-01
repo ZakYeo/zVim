@@ -61,6 +61,17 @@ vim.api.nvim_create_autocmd("ColorScheme", {
   callback = use_terminal_background,
 })
 
+require("config.smooth_scroll").setup({
+  duration = 190,
+  fps = 60,
+  easing = "out_sine",
+  mappings = {
+    default_control = true,
+    jk = false,
+    mouse = false,
+  },
+})
+
 local function neo_tree_width()
   return math.max(math.floor(vim.o.columns * 0.25), 30)
 end
