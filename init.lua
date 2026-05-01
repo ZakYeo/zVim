@@ -149,6 +149,26 @@ local function open_terminal_buffer()
   vim.cmd.startinsert()
 end
 
+local function toggle_bottom_terminal()
+  local count = vim.v.count
+
+  if count > 0 then
+    require("toggleterm").toggle(count, nil, nil, "horizontal")
+  else
+    require("toggleterm").toggle(nil, nil, nil, "horizontal")
+  end
+end
+
+local function open_next_bottom_terminal()
+  local next_id = 1
+
+  for _, term in ipairs(require("toggleterm.terminal").get_all(true)) do
+    next_id = math.max(next_id, term.id + 1)
+  end
+
+  require("toggleterm").toggle(next_id, nil, nil, "horizontal")
+end
+
 local function close_current_buffer()
   if vim.bo.buftype == "terminal" then
     vim.cmd.bdelete({ bang = true })
@@ -502,6 +522,8 @@ require("lazy").setup({
         { "<leader>r", group = "refactor" },
         { "<leader>rn", desc = "LSP: rename" },
         { "<leader>t", group = "terminal" },
+        { "<leader>tc", desc = "Terminal: close" },
+        { "<leader>tn", desc = "Terminal: new bottom split" },
         { "<leader>ts", desc = "Terminal: select" },
         { "<leader>tt", desc = "Terminal: toggle bottom" },
         { "<leader>tT", desc = "Terminal: full buffer" },
@@ -548,8 +570,17 @@ require("lazy").setup({
         },
       })
 
-      vim.keymap.set("n", "<leader>tt", "<Cmd>ToggleTerm direction=horizontal<CR>", {
+      vim.keymap.set("n", "<leader>tt", toggle_bottom_terminal, {
         desc = "Terminal: toggle bottom",
+      })
+      vim.keymap.set("n", "<leader>tn", open_next_bottom_terminal, {
+        desc = "Terminal: new bottom split",
+      })
+      vim.keymap.set("n", "<leader>tc", close_current_buffer, {
+        desc = "Terminal: close",
+      })
+      vim.keymap.set("t", "<leader>tc", [[<C-\><C-n><Cmd>bdelete!<CR>]], {
+        desc = "Terminal: close",
       })
       vim.keymap.set("n", "<leader>tT", open_terminal_buffer, {
         desc = "Terminal: full buffer",
