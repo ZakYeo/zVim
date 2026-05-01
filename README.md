@@ -18,7 +18,7 @@ zVim, short for Zak's Vim, is a Neovim IDE layer built around `lazy.nvim`. The e
 
 ## Requirements
 
-- Neovim
+- Neovim 0.11 or newer
 - Git
 - `make`
 - `tree-sitter` CLI
@@ -36,26 +36,40 @@ Install zVim from GitHub:
 curl -fsSL https://raw.githubusercontent.com/ZakYeo/zVim/main/install.sh | sh
 ```
 
-The installer clones zVim into `~/.config/zvim` and creates a `zVim` launcher in `~/.local/bin`. The launcher runs Neovim with `NVIM_APPNAME=zvim`, so zVim can live next to an existing Neovim setup.
+The installer clones zVim into `~/.config/zvim` and creates a `zvim` launcher in `~/.local/bin`. The launcher runs Neovim with `NVIM_APPNAME=zvim`, so zVim can live next to an existing Neovim setup.
+
+By default, the installer uses the `nvim` command from your `PATH`. If your default `nvim` is older than Neovim 0.11, set `ZVIM_NVIM_BIN` to a compatible command or absolute path:
+
+```sh
+curl -fsSL https://raw.githubusercontent.com/ZakYeo/zVim/main/install.sh | ZVIM_NVIM_BIN=nvim-lts sh
+```
 
 Run zVim with:
 
 ```sh
-zVim
+zvim
 ```
 
-If `zVim` is not found after installation, add `~/.local/bin` to your `PATH`.
+If `zvim` is not found after installation, add `~/.local/bin` to your `PATH`.
 
-The installer stops if `~/.config/zvim` or `~/.local/bin/zVim` already exists. Move or remove the existing path before reinstalling.
+The installer stops if `~/.config/zvim` or `~/.local/bin/zvim` already exists. Move or remove the existing path before reinstalling.
+
+To uninstall an existing zVim installation before reinstalling:
+
+```sh
+rm -rf ~/.config/zvim
+rm -rf ~/.local/share/zvim ~/.local/state/zvim ~/.cache/zvim
+rm -f ~/.local/bin/zvim ~/.local/bin/zVim
+```
 
 ## Setup And Validation
 
 After installation:
 
 ```sh
-zVim --headless -i NONE '+Lazy! sync' +qa
-zVim --headless -i NONE '+lua require("neo-tree")' +qa
-zVim
+zvim --headless -i NONE '+Lazy! sync' +qa
+zvim --headless -i NONE '+lua require("neo-tree")' +qa
+zvim
 ```
 
 Internally, this repository is validated with the `nvim-lts` binary:
