@@ -5,8 +5,12 @@ local lazygit
 local function fullscreen_float_opts()
   return {
     border = "none",
-    width = vim.o.columns,
-    height = vim.o.lines - vim.o.cmdheight,
+    width = function()
+      return vim.o.columns
+    end,
+    height = function()
+      return vim.o.lines - vim.o.cmdheight
+    end,
     row = 0,
     col = 0,
   }
@@ -20,7 +24,7 @@ local function lazygit_terminal()
       cmd = "lazygit",
       direction = "float",
       hidden = true,
-      float_opts = fullscreen_float_opts,
+      float_opts = fullscreen_float_opts(),
     })
   end
 
