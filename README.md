@@ -80,6 +80,7 @@ Internally, this repository is validated with the `nvim-lts` binary. The example
 - `nvim-treesitter`: Treesitter parser and highlighting support.
 - `telescope.nvim`: file finding and search UI.
 - `telescope-fzf-native.nvim`: native FZF sorter for Telescope.
+- `todo-comments.nvim`: TODO/FIX/FIXME highlighting and search.
 - `plenary.nvim`: shared Lua utility dependency.
 - `which-key.nvim`: keymap discovery.
 - `toggleterm.nvim`: terminal management.
@@ -107,6 +108,13 @@ File finding and search:
 - `<leader>fh`: help tags.
 - `<leader>fr`: recent files.
 - `<leader>fc`: commands.
+- `<leader>ft`: TODO comments.
+- `<leader>fT`: TODO/FIX/FIXME comments.
+
+Todo comments:
+
+- `[t`: previous TODO-style comment.
+- `]t`: next TODO-style comment.
 
 Git:
 
