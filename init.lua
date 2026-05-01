@@ -29,6 +29,8 @@ end, { desc = "Config: open init.lua" })
 vim.o.timeout = true
 vim.o.timeoutlen = 300
 vim.o.showtabline = 2
+vim.opt.number = true
+vim.opt.relativenumber = false
 vim.opt.termguicolors = true
 vim.opt.rtp:prepend(lazypath)
 
