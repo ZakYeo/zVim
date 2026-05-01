@@ -95,6 +95,69 @@ local function open_neo_tree(opts)
   vim.schedule(resize_neo_tree)
 end
 
+local function open_terminal_buffer()
+  local current_win = vim.api.nvim_get_current_win()
+  local target_win
+  local fallback_win
+  local toggleterm_wins = {}
+
+  for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+    local buf = vim.api.nvim_win_get_buf(win)
+
+    if vim.bo[buf].filetype == "toggleterm" then
+      table.insert(toggleterm_wins, win)
+    else
+      fallback_win = fallback_win or win
+
+      if vim.bo[buf].filetype ~= "neo-tree" then
+        if win == current_win then
+          target_win = win
+        else
+          target_win = target_win or win
+        end
+      end
+    end
+  end
+
+  if not target_win then
+    target_win = fallback_win
+  end
+
+  if target_win and vim.api.nvim_win_is_valid(target_win) then
+    vim.api.nvim_set_current_win(target_win)
+
+    for _, win in ipairs(toggleterm_wins) do
+      if vim.api.nvim_win_is_valid(win) then
+        vim.api.nvim_win_close(win, true)
+      end
+    end
+  else
+    for _, win in ipairs(toggleterm_wins) do
+      if win ~= current_win and vim.api.nvim_win_is_valid(win) then
+        vim.api.nvim_win_close(win, true)
+      end
+    end
+  end
+
+  if vim.bo.filetype == "neo-tree" then
+    vim.cmd.wincmd("p")
+  end
+
+  vim.cmd.enew()
+  vim.bo.buflisted = true
+  vim.cmd.terminal()
+  vim.cmd.startinsert()
+end
+
+local function close_current_buffer()
+  if vim.bo.buftype == "terminal" then
+    vim.cmd.bdelete({ bang = true })
+    return
+  end
+
+  vim.cmd.bdelete()
+end
+
 vim.keymap.set("n", "<leader>e", function()
   open_neo_tree({ toggle = true, reveal = true })
 end, { desc = "Explorer: toggle" })
@@ -105,6 +168,23 @@ end, { desc = "Explorer: cwd" })
 
 vim.api.nvim_create_autocmd({ "VimResized", "WinResized" }, {
   callback = resize_neo_tree,
+})
+
+vim.api.nvim_create_autocmd("TermOpen", {
+  group = vim.api.nvim_create_augroup("user_terminal_keymaps", { clear = true }),
+  pattern = "term://*",
+  callback = function(event)
+    local opts = {
+      buffer = event.buf,
+      silent = true,
+    }
+
+    vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]], opts)
+    vim.keymap.set("t", "<C-h>", [[<C-\><C-n><C-w>h]], opts)
+    vim.keymap.set("t", "<C-j>", [[<C-\><C-n><C-w>j]], opts)
+    vim.keymap.set("t", "<C-k>", [[<C-\><C-n><C-w>k]], opts)
+    vim.keymap.set("t", "<C-l>", [[<C-\><C-n><C-w>l]], opts)
+  end,
 })
 
 vim.diagnostic.config({
@@ -421,6 +501,10 @@ require("lazy").setup({
         { "<leader>lf", desc = "LSP: format" },
         { "<leader>r", group = "refactor" },
         { "<leader>rn", desc = "LSP: rename" },
+        { "<leader>t", group = "terminal" },
+        { "<leader>ts", desc = "Terminal: select" },
+        { "<leader>tt", desc = "Terminal: toggle bottom" },
+        { "<leader>tT", desc = "Terminal: full buffer" },
         { "<leader>c", group = "code" },
         { "<leader>ca", desc = "LSP: code action" },
         { "[d", desc = "LSP: previous diagnostic" },
@@ -434,6 +518,40 @@ require("lazy").setup({
         { "<S-l>", desc = "Buffer: next tab" },
       },
     },
+  },
+  {
+    "akinsho/toggleterm.nvim",
+    version = "*",
+    lazy = false,
+    config = function()
+      require("toggleterm").setup({
+        size = function(term)
+          if term.direction == "horizontal" then
+            return 15
+          end
+
+          return math.floor(vim.o.columns * 0.4)
+        end,
+        direction = "horizontal",
+        hide_numbers = true,
+        shade_terminals = false,
+        start_in_insert = true,
+        persist_size = true,
+        persist_mode = true,
+        close_on_exit = true,
+        auto_scroll = true,
+      })
+
+      vim.keymap.set("n", "<leader>tt", "<Cmd>ToggleTerm direction=horizontal<CR>", {
+        desc = "Terminal: toggle bottom",
+      })
+      vim.keymap.set("n", "<leader>tT", open_terminal_buffer, {
+        desc = "Terminal: full buffer",
+      })
+      vim.keymap.set("n", "<leader>ts", "<Cmd>TermSelect<CR>", {
+        desc = "Terminal: select",
+      })
+    end,
   },
   {
     "akinsho/bufferline.nvim",
@@ -474,7 +592,7 @@ require("lazy").setup({
       vim.keymap.set("n", "<S-l>", "<Cmd>BufferLineCycleNext<CR>", { desc = "Buffer: next tab" })
       vim.keymap.set("n", "<S-h>", "<Cmd>BufferLineCyclePrev<CR>", { desc = "Buffer: previous tab" })
       vim.keymap.set("n", "<leader>0", "<Cmd>BufferLineGoToBuffer -1<CR>", { desc = "Buffer: last tab" })
-      vim.keymap.set("n", "<leader>bd", "<Cmd>bdelete<CR>", { desc = "Buffer: close" })
+      vim.keymap.set("n", "<leader>bd", close_current_buffer, { desc = "Buffer: close" })
 
       for i = 1, 9 do
         vim.keymap.set("n", "<leader>" .. i, "<Cmd>BufferLineGoToBuffer " .. i .. "<CR>", {
