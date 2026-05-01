@@ -31,6 +31,8 @@ vim.o.timeoutlen = 300
 vim.o.showtabline = 2
 vim.opt.number = true
 vim.opt.relativenumber = false
+vim.opt.scrolloff = 5
+vim.opt.sidescrolloff = 5
 vim.opt.termguicolors = true
 vim.opt.rtp:prepend(lazypath)
 
