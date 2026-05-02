@@ -1,3 +1,4 @@
 nvim.log
 .nvimlog
 .zvim-version
+.env
