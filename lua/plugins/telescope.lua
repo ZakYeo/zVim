@@ -61,5 +61,6 @@ return {
     vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Find: help" })
     vim.keymap.set("n", "<leader>fr", builtin.oldfiles, { desc = "Find: recent files" })
     vim.keymap.set("n", "<leader>fc", builtin.commands, { desc = "Find: commands" })
+    vim.keymap.set("n", "<leader>fd", builtin.diagnostics, { desc = "Find: diagnostics" })
   end,
 }

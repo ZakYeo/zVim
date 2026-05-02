@@ -21,6 +21,7 @@ return {
       { "<leader>f", group = "find" },
       { "<leader>fb", desc = "Find: buffers" },
       { "<leader>fc", desc = "Find: commands" },
+      { "<leader>fd", desc = "Find: diagnostics" },
       { "<leader>ff", desc = "Find: files" },
       { "<leader>fh", desc = "Find: help" },
       { "<leader>fr", desc = "Find: recent files" },

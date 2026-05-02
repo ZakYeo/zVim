@@ -141,6 +141,7 @@ File finding and search:
 - `<leader>fh`: help tags.
 - `<leader>fr`: recent files.
 - `<leader>fc`: commands.
+- `<leader>fd`: diagnostics.
 - `<leader>ft`: TODO comments.
 - `<leader>fT`: TODO/FIX/FIXME comments.
 - `<C-t>` in Telescope: open Telescope results in Trouble.
