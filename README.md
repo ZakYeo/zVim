@@ -35,18 +35,24 @@ zVim, short for Zak's Vim, is a Neovim IDE layer built around `lazy.nvim`. The e
 
 ## Installation
 
-Install zVim from GitHub:
+Install the latest zVim release from GitHub:
 
 ```sh
 curl -fsSL https://raw.githubusercontent.com/ZakYeo/zVim/main/install.sh | sh
 ```
 
-The installer clones zVim into `~/.config/zvim` and creates a `zvim` launcher in `~/.local/bin`. The launcher runs Neovim with `NVIM_APPNAME=zvim`, so zVim can live next to an existing Neovim setup.
+The installer clones the latest GitHub release into `~/.config/zvim` and creates a `zvim` launcher in `~/.local/bin`. The launcher runs Neovim with `NVIM_APPNAME=zvim`, so zVim can live next to an existing Neovim setup.
 
 By default, the installer uses the `nvim` command from your `PATH`. If your default `nvim` is older than Neovim 0.11, set `ZVIM_NVIM_BIN` to a compatible command or absolute path:
 
 ```sh
 curl -fsSL https://raw.githubusercontent.com/ZakYeo/zVim/main/install.sh | ZVIM_NVIM_BIN=nvim-lts sh
+```
+
+Install a specific release by setting `ZVIM_VERSION`:
+
+```sh
+curl -fsSL https://raw.githubusercontent.com/ZakYeo/zVim/main/install.sh | ZVIM_VERSION=v1.0.0 sh
 ```
 
 Run the zVim CLI with:
@@ -57,7 +63,13 @@ zvim
 
 If `zvim` is not found after installation, add `~/.local/bin` to your `PATH`.
 
-The installer stops if `~/.config/zvim` or `~/.local/bin/zvim` already exists. Move or remove the existing path before reinstalling.
+Re-running the install command checks the installed version against the latest GitHub release. If a newer release exists, the installer asks before updating. For non-interactive updates, set `ZVIM_UPDATE=1`:
+
+```sh
+curl -fsSL https://raw.githubusercontent.com/ZakYeo/zVim/main/install.sh | ZVIM_UPDATE=1 sh
+```
+
+The installer stops before updating if `~/.config/zvim` contains local changes. Commit, stash, or back up those changes before updating.
 
 To uninstall an existing zVim installation before reinstalling:
 
