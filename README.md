@@ -111,11 +111,13 @@ nvim-lts --headless -i NONE '+lua require("neo-tree")' +qa
 - `nvim-treesitter`: Treesitter parser and highlighting support.
 - `telescope.nvim`: file finding and search UI.
 - `telescope-fzf-native.nvim`: native FZF sorter for Telescope.
+- `trouble.nvim`: diagnostics, symbols, LSP locations, quickfix, and Telescope result lists.
 - `todo-comments.nvim`: TODO/FIX/FIXME highlighting and search.
 - `plenary.nvim`: shared Lua utility dependency.
 - `which-key.nvim`: keymap discovery.
 - `toggleterm.nvim`: terminal management.
 - `bufferline.nvim`: buffer tabline.
+- `lualine.nvim`: statusline.
 - `neo-tree.nvim`: file explorer.
 - `nui.nvim`: Neo-tree UI dependency.
 - `nvim-web-devicons`: file and plugin icons.
@@ -141,6 +143,17 @@ File finding and search:
 - `<leader>fc`: commands.
 - `<leader>ft`: TODO comments.
 - `<leader>fT`: TODO/FIX/FIXME comments.
+- `<C-t>` in Telescope: open Telescope results in Trouble.
+- `<C-a>` in Telescope: append Telescope results to Trouble.
+
+Trouble:
+
+- `<leader>xx`: workspace diagnostics.
+- `<leader>xX`: current-buffer diagnostics.
+- `<leader>cs`: document symbols.
+- `<leader>cl`: LSP definitions, references, implementations, and declarations.
+- `<leader>xL`: location list.
+- `<leader>xQ`: quickfix list.
 
 Todo comments:
 

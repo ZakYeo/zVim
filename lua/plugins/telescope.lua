@@ -24,6 +24,24 @@ return {
           },
         },
         sorting_strategy = "ascending",
+        mappings = {
+          i = {
+            ["<C-t>"] = function(...)
+              return require("trouble.sources.telescope").open(...)
+            end,
+            ["<C-a>"] = function(...)
+              return require("trouble.sources.telescope").add(...)
+            end,
+          },
+          n = {
+            ["<C-t>"] = function(...)
+              return require("trouble.sources.telescope").open(...)
+            end,
+            ["<C-a>"] = function(...)
+              return require("trouble.sources.telescope").add(...)
+            end,
+          },
+        },
       },
       extensions = {
         fzf = {
