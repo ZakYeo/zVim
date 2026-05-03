@@ -6,6 +6,7 @@ return {
     spec = {
       { "<leader>e", desc = "Explorer: toggle" },
       { "<leader>E", desc = "Explorer: cwd", icon = { icon = "󰉋 ", color = "blue" } },
+      { "<leader>w", desc = "File: write" },
       { "<leader>b", group = "buffer" },
       { "<leader>b0", desc = "Buffer: last tab" },
       { "<leader>b1", desc = "Buffer: tab 1" },

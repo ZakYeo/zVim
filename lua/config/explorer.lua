@@ -1,6 +1,12 @@
 local M = {}
 
+local neo_tree_width_mode = "big"
+
 function M.neo_tree_width()
+  if neo_tree_width_mode == "small" then
+    return math.max(math.floor(vim.o.columns * 0.15), 24)
+  end
+
   return math.max(math.floor(vim.o.columns * 0.25), 30)
 end
 
@@ -11,6 +17,16 @@ function M.resize_neo_tree()
       vim.api.nvim_win_set_width(win, M.neo_tree_width())
     end
   end
+end
+
+function M.toggle_neo_tree_width()
+  if neo_tree_width_mode == "big" then
+    neo_tree_width_mode = "small"
+  else
+    neo_tree_width_mode = "big"
+  end
+
+  M.resize_neo_tree()
 end
 
 function M.open_neo_tree(opts)

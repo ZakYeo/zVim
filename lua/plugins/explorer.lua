@@ -32,6 +32,11 @@ return {
         },
         hijack_netrw_behavior = "open_default",
         use_libuv_file_watcher = true,
+        window = {
+          mappings = {
+            e = explorer.toggle_neo_tree_width,
+          },
+        },
       },
       window = {
         position = "right",
