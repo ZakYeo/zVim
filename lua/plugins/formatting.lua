@@ -1,3 +1,45 @@
+local prettier_config_files = {
+  ".prettierrc",
+  ".prettierrc.json",
+  ".prettierrc.yml",
+  ".prettierrc.yaml",
+  ".prettierrc.json5",
+  ".prettierrc.js",
+  ".prettierrc.cjs",
+  ".prettierrc.mjs",
+  ".prettierrc.ts",
+  ".prettierrc.cts",
+  ".prettierrc.mts",
+  ".prettierrc.toml",
+  "prettier.config.js",
+  "prettier.config.cjs",
+  "prettier.config.mjs",
+  "prettier.config.ts",
+  "prettier.config.cts",
+  "prettier.config.mts",
+}
+
+local function package_has_prettier(path)
+  local package_json = vim.fs.joinpath(path, "package.json")
+  local ok, contents = pcall(vim.fn.readfile, package_json)
+  if not ok then
+    return false
+  end
+
+  local ok_decode, package_data = pcall(vim.json.decode, table.concat(contents, "\n"))
+  return ok_decode and package_data and package_data.prettier ~= nil
+end
+
+local function prettier_root(_, ctx)
+  return vim.fs.root(ctx.dirname, function(name, path)
+    if vim.tbl_contains(prettier_config_files, name) then
+      return true
+    end
+
+    return name == "package.json" and package_has_prettier(path)
+  end)
+end
+
 return {
   {
     "WhoIsSethDaniel/mason-tool-installer.nvim",
@@ -44,6 +86,9 @@ return {
         lsp_format = "fallback",
       },
       formatters = {
+        prettier = {
+          cwd = prettier_root,
+        },
         shfmt = {
           append_args = { "-i", "2" },
         },
