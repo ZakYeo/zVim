@@ -1,0 +1,53 @@
+return {
+  "ZakYeo/neovim-docker",
+  cmd = {
+    "DockerDashboard",
+    "DockerContainers",
+    "DockerImages",
+    "DockerVolumes",
+    "DockerNetworks",
+    "DockerCompose",
+    "DockerComposeCwd",
+    "DockerComposeProjects",
+    "DockerComposeFiles",
+    "DockerComposeContainers",
+    "DockerRegistries",
+    "DockerRegistryStatus",
+    "DockerLogs",
+    "DockerExec",
+    "DockerPull",
+    "DockerPush",
+    "DockerTag",
+    "DockerSearch",
+    "DockerImageHistory",
+    "DockerImagePrune",
+    "DockerAction",
+    "DockerTelescopeContainers",
+    "DockerTelescopeImages",
+    "DockerTelescopeVolumes",
+  },
+  keys = {
+    { "<leader>Dd", "<cmd>DockerDashboard<cr>", desc = "Docker: dashboard" },
+    { "<leader>Dc", "<cmd>DockerContainers<cr>", desc = "Docker: containers" },
+    { "<leader>Di", "<cmd>DockerImages<cr>", desc = "Docker: images" },
+    { "<leader>Dv", "<cmd>DockerVolumes<cr>", desc = "Docker: volumes" },
+    { "<leader>Dn", "<cmd>DockerNetworks<cr>", desc = "Docker: networks" },
+    { "<leader>Dp", "<cmd>DockerCompose<cr>", desc = "Docker: compose" },
+    { "<leader>Dr", "<cmd>DockerRegistries<cr>", desc = "Docker: registries" },
+    { "<leader>Dt", "<cmd>DockerTelescopeContainers<cr>", desc = "Docker: containers picker" },
+    { "<leader>DT", "<cmd>DockerTelescopeImages<cr>", desc = "Docker: images picker" },
+  },
+  opts = {
+    ui = {
+      open_strategy = "current",
+    },
+    integrations = {
+      telescope = {
+        enabled = "auto",
+      },
+      which_key = {
+        action_menu = true,
+      },
+    },
+  },
+}

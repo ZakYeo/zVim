@@ -3,6 +3,10 @@ return {
   event = "VeryLazy",
   opts = {
     preset = "modern",
+    triggers = {
+      { "<auto>", mode = "nixsotc" },
+      { "a", mode = "n" },
+    },
     spec = {
       { "<leader>e", desc = "Explorer: toggle" },
       { "<leader>E", desc = "Explorer: cwd", icon = { icon = "󰉋 ", color = "blue" } },
@@ -69,6 +73,16 @@ return {
       { "<leader>cbx", desc = "Context Builder: clear" },
       { "<leader>cl", desc = "Trouble: LSP locations" },
       { "<leader>cs", desc = "Trouble: document symbols" },
+      { "<leader>D", group = "docker" },
+      { "<leader>Dc", desc = "Docker: containers" },
+      { "<leader>Dd", desc = "Docker: dashboard" },
+      { "<leader>Di", desc = "Docker: images" },
+      { "<leader>Dn", desc = "Docker: networks" },
+      { "<leader>Dp", desc = "Docker: compose" },
+      { "<leader>Dr", desc = "Docker: registries" },
+      { "<leader>Dt", desc = "Docker: containers picker" },
+      { "<leader>DT", desc = "Docker: images picker" },
+      { "<leader>Dv", desc = "Docker: volumes" },
       { "<leader>x", group = "trouble", icon = { icon = "󱖫 ", color = "green" } },
       { "<leader>xx", desc = "Trouble: diagnostics" },
       { "<leader>xX", desc = "Trouble: buffer diagnostics" },
